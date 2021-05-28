@@ -1,6 +1,6 @@
+import 'package:flutter_todo_simple/presentation/home/bindings/add_todo_binding.dart';
 import 'package:flutter_todo_simple/presentation/home/bindings/home_binding.dart';
 import 'package:flutter_todo_simple/presentation/home/views/home_view.dart';
-import 'package:flutter_todo_simple/presentation/profile/bindings/profile_binding.dart';
 import 'package:flutter_todo_simple/presentation/profile/views/profile_view.dart';
 import 'package:flutter_todo_simple/presentation/splash/bindings/splash_binding.dart';
 import 'package:flutter_todo_simple/presentation/splash/views/splash_view.dart';
@@ -17,12 +17,11 @@ class AppPages {
     GetPage(
       name: _Paths.PRESENTATION + _Paths.HOME,
       page: () => HomeView(),
-      binding: HomeBinding(),
+      bindings: [HomeBinding(), AddTodoBinding()],
     ),
     GetPage(
       name: _Paths.PRESENTATION + _Paths.PROFILE,
       page: () => ProfileView(),
-      binding: ProfileBinding(),
     ),
     GetPage(
       name: _Paths.PRESENTATION + _Paths.SPLASH_SCREEN,

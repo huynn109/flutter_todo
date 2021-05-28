@@ -18,9 +18,11 @@ class HomeTodoList extends GetView<HomeController> {
         case ViewState.error:
           break;
         case ViewState.empty:
-          return EmptyView();
+          return EmptyView(
+            isExpanded: true,
+          );
         case ViewState.data:
-          return HomeViewWithData(
+          return HomeTodoDataList(
             todoList: controller.todoList.cast(),
           );
       }
@@ -29,10 +31,10 @@ class HomeTodoList extends GetView<HomeController> {
   }
 }
 
-class HomeViewWithData extends StatelessWidget {
+class HomeTodoDataList extends StatelessWidget {
   final List<Todo> todoList;
 
-  HomeViewWithData({Key? key, required this.todoList}) : super(key: key);
+  HomeTodoDataList({Key? key, required this.todoList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
