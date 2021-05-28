@@ -59,29 +59,7 @@ class HomeView extends StatelessWidget {
         elevation: 4.0,
         icon: const Icon(Icons.add),
         label: const Text('Add a new task', maxLines: 1),
-        onPressed: () {
-          showModalCustomBottomSheet<Task>(
-              context: context,
-              builder: (BuildContext context) {
-                // return new AnimatedPadding(
-                //   padding: MediaQuery.of(context).viewInsets,
-                //   duration: const Duration(milliseconds: 100),
-                //   curve: Curves.decelerate,
-                //   child: new Container(
-                //     alignment: Alignment.bottomCenter,
-                //     child: Wrap(
-                //       children: <Widget>[
-                //         AddTaskWidget(),
-                //       ],
-                //     ),
-                //   ),
-                // );
-                return AddTaskWidget();
-              }).then((newTask) {
-            if (newTask == null || newTask.title.isNotEmpty)
-              tasks.onNewTaskSave(newTask);
-          });
-        },
+        onPressed: () {},
       ),
     );
   }
