@@ -1,6 +1,6 @@
+import 'package:flutter_todo_simple/app/core/core.dart';
+import 'package:flutter_todo_simple/app/di/injector.dart';
 import 'package:flutter_todo_simple/app/routes/app_pages.dart';
-import 'package:flutter_todo_simple/core/core.dart';
-import 'package:flutter_todo_simple/di/injector.dart';
 import 'package:flutter_todo_simple/domain/usecases/init_sqflite_database.dart';
 import 'package:flutter_todo_simple/domain/usecases/insert_local_category_list.dart';
 import 'package:get/get.dart';

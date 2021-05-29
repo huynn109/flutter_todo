@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_simple/core/core.dart';
+import 'package:flutter_todo_simple/app/core/core.dart';
+import 'package:flutter_todo_simple/app/resources/resource.dart';
 import 'package:flutter_todo_simple/domain/domain.dart';
-import 'package:flutter_todo_simple/resources/resource.dart';
 
 class HomeTodoItem extends StatefulWidget {
   HomeTodoItem(Todo todoItem);

@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_todo_simple/core/errors/failure.dart';
+import 'package:flutter_todo_simple/app/core/errors/failure.dart';
 import 'package:flutter_todo_simple/data/datasource/local/local_category_provider.dart';
 import 'package:flutter_todo_simple/data/datasource/network/api_category_provider.dart';
 import 'package:flutter_todo_simple/domain/domain.dart';

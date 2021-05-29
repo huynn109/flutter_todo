@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_simple/app/resources/resource.dart';
 import 'package:flutter_todo_simple/presentation/home/views/extras/home_category_list.dart';
-import 'package:flutter_todo_simple/resources/resource.dart';
 
 class HomeCategoryView extends StatelessWidget {
   @override

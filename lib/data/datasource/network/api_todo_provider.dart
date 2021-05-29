@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_todo_simple/core/core.dart';
+import 'package:flutter_todo_simple/app/core/core.dart';
+import 'package:flutter_todo_simple/app/resources/resource.dart';
 import 'package:flutter_todo_simple/data/service/retrofit/retrofit.dart';
 import 'package:flutter_todo_simple/domain/domain.dart';
-import 'package:flutter_todo_simple/resources/resource.dart';
 
 abstract class IApiTodoProvider {
   Future<Either<Failure, List<Todo>>> getTodoList();

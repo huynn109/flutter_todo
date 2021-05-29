@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_simple/app/resources/resource.dart';
 import 'package:flutter_todo_simple/presentation/home/controllers/home_controller.dart';
 import 'package:flutter_todo_simple/presentation/home/views/extras/home_todo_list.dart';
-import 'package:flutter_todo_simple/resources/resource.dart';
 import 'package:get/get.dart';
 
 class HomeTodoView extends GetView<HomeController> {

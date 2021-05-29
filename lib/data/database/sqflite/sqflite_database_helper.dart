@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:flutter_todo_simple/core/core.dart';
+import 'package:flutter_todo_simple/app/core/core.dart';
 import 'package:flutter_todo_simple/data/data.dart';
 import 'package:flutter_todo_simple/data/database/todo_database.dart';
 import 'package:flutter_todo_simple/domain/domain.dart';

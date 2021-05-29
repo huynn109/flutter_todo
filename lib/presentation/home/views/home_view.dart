@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_simple/app/resources/resource.dart';
 import 'package:flutter_todo_simple/presentation/home/views/extras/home_add_todo_view.dart';
 import 'package:flutter_todo_simple/presentation/home/views/extras/home_category_view.dart';
 import 'package:flutter_todo_simple/presentation/home/views/extras/home_header_view.dart';
 import 'package:flutter_todo_simple/presentation/home/views/extras/home_todo_view.dart';
-import 'package:flutter_todo_simple/resources/resource.dart';
 import 'package:get/get.dart';
 
 class HomeView extends StatelessWidget {

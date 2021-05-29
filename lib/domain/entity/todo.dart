@@ -1,4 +1,4 @@
-import 'package:flutter_todo_simple/core/utils/uuid_utils.dart';
+import 'package:flutter_todo_simple/app/core/utils/uuid_utils.dart';
 import 'package:flutter_todo_simple/data/data.dart';
 
 class Todo {

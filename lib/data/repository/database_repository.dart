@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_todo_simple/core/errors/failure.dart';
+import 'package:flutter_todo_simple/app/core/errors/failure.dart';
 import 'package:flutter_todo_simple/data/datasource/local/local_database_manager.dart';
 import 'package:flutter_todo_simple/domain/repositories/database_repository.dart';
 

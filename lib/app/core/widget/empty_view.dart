@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_todo_simple/resources/resource.dart';
+import 'package:flutter_todo_simple/app/resources/resource.dart';
 
 class EmptyView extends StatelessWidget {
   const EmptyView({
