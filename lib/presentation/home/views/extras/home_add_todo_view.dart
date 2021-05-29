@@ -26,55 +26,17 @@ class HomeAddTodoView extends GetView<AddTodoController> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-              child: TextFormField(
-                controller: _controller,
-                autofocus: true,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Input todo',
-                ),
-                autocorrect: false,
-                keyboardType: TextInputType.text,
-              ),
+              child: buildInputAddTodo(),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                IconButton(
-                  icon: Icon(
-                    Icons.date_range_outlined,
-                    color: Colors.blue,
-                  ),
-                  onPressed: () {
-                    showDatePicker(
-                      context: context,
-                      initialDate: date ?? DateTime.now(),
-                      firstDate:
-                          (date ?? DateTime.now()).subtract(Duration(days: 30)),
-                      lastDate:
-                          (date ?? DateTime.now()).add(Duration(days: 365)),
-                    ).then((value) {
-                      if (value == null) return;
-                      print("Date: ${value.toIso8601String()}");
-                    }).catchError((error) {
-                      print(error.toString());
-                    });
-                  },
-                ),
+                buildIconButtonSelectDate(context),
                 Text(DateTime.now().toString()),
                 Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(right: 8),
-                  child: TextButton(
-                    child: Text(
-                      'Save',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    onPressed: () {},
-                  ),
+                  child: buildTextButtonSave(controller),
                 ),
               ],
             ),
@@ -84,6 +46,54 @@ class HomeAddTodoView extends GetView<AddTodoController> {
           ],
         ),
       ),
+    );
+  }
+
+  TextButton buildTextButtonSave(AddTodoController controller) {
+    return TextButton(
+      child: Text(
+        'Save',
+        style: TextStyle(
+          color: Colors.blue,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      onPressed: () {},
+    );
+  }
+
+  IconButton buildIconButtonSelectDate(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        Icons.date_range_outlined,
+        color: Colors.blue,
+      ),
+      onPressed: () {
+        showDatePicker(
+          context: context,
+          initialDate: date ?? DateTime.now(),
+          firstDate: (date ?? DateTime.now()).subtract(Duration(days: 30)),
+          lastDate: (date ?? DateTime.now()).add(Duration(days: 365)),
+        ).then((value) {
+          if (value == null) return;
+          print("Date: ${value.toIso8601String()}");
+        }).catchError((error) {
+          print(error.toString());
+        });
+      },
+    );
+  }
+
+  TextFormField buildInputAddTodo() {
+    return TextFormField(
+      controller: _controller,
+      autofocus: true,
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        hintText: 'Input todo',
+      ),
+      autocorrect: false,
+      keyboardType: TextInputType.text,
     );
   }
 }

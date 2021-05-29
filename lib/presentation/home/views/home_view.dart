@@ -14,34 +14,8 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         elevation: 0.0,
-        leading: IconButton(
-          icon: Icon(Icons.account_circle),
-          color: const Color(COLOUR_GREY),
-          tooltip: 'Profile',
-          onPressed: () {
-            // handle the press
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search_outlined),
-            color: const Color(COLOUR_GREY),
-            tooltip: 'Search',
-            onPressed: () {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(const SnackBar(content: Text('Search')));
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined),
-            color: const Color(COLOUR_GREY),
-            tooltip: 'Notifications',
-            onPressed: () {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(const SnackBar(content: Text('Notifications')));
-            },
-          ),
-        ],
+        leading: iconButtonProfile(),
+        actions: iconButtonActions(),
       ),
       body: Container(
         color: const Color(COLOUR_GREY_LIGHT),
@@ -68,25 +42,84 @@ class HomeView extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        elevation: 4.0,
-        icon: const Icon(Icons.add),
-        label: const Text('Add a new task', maxLines: 1),
-        onPressed: () {
-          Get.bottomSheet(
-            AnimatedPadding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              duration: const Duration(milliseconds: 100),
-              curve: Curves.decelerate,
-              child: Container(
-                child: HomeAddTodoView(),
-              ),
-            ),
-            isScrollControlled: true,
-          );
-        },
+      floatingActionButton: FabAddTodoWidget(),
+    );
+  }
+
+  List<Widget> iconButtonActions() {
+    return [
+      iconButtonSearch(),
+      iconButtonNotification(),
+    ];
+  }
+
+  IconButton iconButtonNotification() {
+    return IconButton(
+      icon: const Icon(Icons.notifications_outlined),
+      color: const Color(COLOUR_GREY),
+      tooltip: 'Notifications',
+      onPressed: () => Get.snackbar(
+        "Notifications",
+        "Building",
       ),
+    );
+  }
+
+  IconButton iconButtonSearch() {
+    return IconButton(
+      icon: const Icon(Icons.search_outlined),
+      color: const Color(COLOUR_GREY),
+      tooltip: 'Search',
+      onPressed: () => Get.snackbar(
+        "Search",
+        "Building",
+      ),
+    );
+  }
+
+  IconButton iconButtonProfile() {
+    return IconButton(
+      icon: Icon(Icons.account_circle),
+      color: const Color(COLOUR_GREY),
+      tooltip: 'Profile',
+      onPressed: () => Get.snackbar(
+        "Profile",
+        "Building",
+      ),
+    );
+  }
+}
+
+class FabAddTodoWidget extends StatelessWidget {
+  const FabAddTodoWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton.extended(
+      elevation: 4.0,
+      icon: const Icon(Icons.add),
+      label: const Text('Add a new task', maxLines: 1),
+      onPressed: () => createBottomSheetWidget(context),
+    );
+  }
+
+  void createBottomSheetWidget(BuildContext context) {
+    Get.bottomSheet(
+      animatedInputTodoWidget(context),
+      isScrollControlled: true,
+    );
+  }
+
+  AnimatedPadding animatedInputTodoWidget(BuildContext context) {
+    return AnimatedPadding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      duration: const Duration(milliseconds: 100),
+      curve: Curves.decelerate,
+      child: HomeAddTodoView(),
     );
   }
 }

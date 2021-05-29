@@ -4,11 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_todo_simple/resources/resource.dart';
 
 class EmptyView extends StatelessWidget {
-  final String title;
-  final String content;
-
-  final bool isExpanded;
-
   const EmptyView({
     Key? key,
     this.title = "No data",
@@ -16,19 +11,31 @@ class EmptyView extends StatelessWidget {
     this.isExpanded = false,
   }) : super(key: key);
 
+  final String title;
+  final String content;
+  final bool isExpanded;
+
   @override
   Widget build(BuildContext context) {
-    Widget contentWidget = buildContentEmptyWidget(context, title, content);
+    Widget contentWidget = buildBodyEmptyWidgetWith(
+      context,
+      title,
+      content,
+    );
     if (isExpanded) {
-      return Expanded(child: contentWidget);
+      return Expanded(
+        child: contentWidget,
+      );
     }
     return contentWidget;
   }
 
-  Widget buildContentEmptyWidget(
+  Widget buildBodyEmptyWidgetWith(
       BuildContext context, String title, String textContent) {
     return Container(
-      color: const Color(COLOUR_GREY_LIGHT),
+      color: const Color(
+        COLOUR_GREY_LIGHT,
+      ),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -40,7 +47,9 @@ class EmptyView extends StatelessWidget {
             SizedBox(
               height: 4,
             ),
-            Text(content),
+            Text(
+              content,
+            ),
           ],
         ),
       ),
