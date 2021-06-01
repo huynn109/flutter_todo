@@ -1,8 +1,8 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_simple/app/core/core.dart';
-import 'package:flutter_todo_simple/app/di/injector.dart';
-import 'package:flutter_todo_simple/app/resources/resource.dart';
-import 'package:flutter_todo_simple/app/routes/app_pages.dart';
+import 'package:flutter_todo_simple/di/injector.dart';
+import 'package:flutter_todo_simple/resources/resource.dart';
+import 'package:flutter_todo_simple/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 void main() {

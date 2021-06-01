@@ -1,0 +1,22 @@
+name: domain
+description: Domain module
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  core:
+    path: ../core/
+  #equa
+  equatable: ^2.0.2
+  #function
+  dartz: 0.10.0-nullsafety.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+

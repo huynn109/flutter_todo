@@ -1,0 +1,21 @@
+name: core
+description: core package.
+version: 0.0.1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  #network
+  retrofit: any
+  dio: ^4.0.0
+  #env
+  flutter_dotenv: 5.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:

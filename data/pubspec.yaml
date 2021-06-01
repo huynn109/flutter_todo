@@ -1,0 +1,34 @@
+name: data
+description: Data module
+version: 1.0.0+1
+publish_to: none
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  #core
+  core:
+    path: ../core/
+  #domain
+  domain:
+    path: ../domain/
+  #equa
+  equatable: ^2.0.2
+  #databse
+  sqflite: 2.0.0+3
+  #json
+  json_annotation: ^4.0.1
+  json_serializable: ^4.1.2
+  #network
+  retrofit: any
+  dio: ^4.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  #network
+  retrofit_generator: any
+
+

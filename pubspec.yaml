@@ -23,25 +23,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  core:
+    path: core
+  domain:
+    path: domain
+  data:
+    path: data
   #state management
   get: 4.1.4
-  #databse
-  sqflite: 2.0.0+3
   #function
   dartz: 0.10.0-nullsafety.2
-  #json
-  json_annotation: ^4.0.1
-  json_serializable: ^4.1.2
   #meta
   meta: ^1.2.3
-  #network
-  retrofit: any
-  logger: any  #for logging purpose
-  dio: ^4.0.0
-  #env
-  flutter_dotenv: 4.0.0-nullsafety.1
-  #equa
-  equatable: ^2.0.2
+  #for logging purpose
+  logger: any
   #IoC
   kiwi: 3.0.0-nullsafety.1
 
@@ -54,7 +49,6 @@ dev_dependencies:
     sdk: flutter
   # code generators
   build_runner: ^1.10.3
-  retrofit_generator: any
   kiwi_generator: 3.0.0-nullsafety-generator.4
 
 # For information on the generic Dart part of this file, see the
