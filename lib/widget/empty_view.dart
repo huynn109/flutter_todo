@@ -27,11 +27,15 @@ class EmptyView extends StatelessWidget {
         child: contentWidget,
       );
     }
+
     return contentWidget;
   }
 
   Widget buildBodyEmptyWidgetWith(
-      BuildContext context, String title, String textContent) {
+    BuildContext context,
+    String title,
+    String textContent,
+  ) {
     return Container(
       color: const Color(
         COLOUR_GREY_LIGHT,

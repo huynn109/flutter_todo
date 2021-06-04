@@ -15,8 +15,6 @@ class ProfileController extends GetxController {
     super.onReady();
   }
 
-  @override
-  void onClose() {}
   void increment() => count.value++;
   void gotoHome() => Get.to(Routes.HOME);
 }

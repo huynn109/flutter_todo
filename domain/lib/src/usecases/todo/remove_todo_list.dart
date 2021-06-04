@@ -1,4 +1,4 @@
-import 'package:core/src/result/failure.dart';
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:domain/domain.dart';
 

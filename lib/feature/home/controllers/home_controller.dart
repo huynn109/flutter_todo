@@ -49,7 +49,8 @@ class HomeController extends GetxController {
   void _setEmptyTodoList() => viewState.value = ViewState.empty;
 
   void handleResultCategoryList(
-      Either<Failure, List<Category>> resultLocalCategory) {
+    Either<Failure, List<Category>> resultLocalCategory,
+  ) {
     resultLocalCategory.fold(
       (l) => _setViewState(ViewState.error),
       (categoryDataList) {

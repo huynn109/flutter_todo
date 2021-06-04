@@ -19,7 +19,6 @@ class HomeTodoItem extends StatelessWidget {
       shape: roundedRectangleBorder(),
       child: ListTile(
         shape: roundedRectangleBorder(),
-        onTap: () {},
         title: Row(
           children: [
             Padding(
@@ -39,7 +38,8 @@ class HomeTodoItem extends StatelessWidget {
               child: Text(
                 todoItem.text ?? '',
                 style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                      decoration: false ? TextDecoration.lineThrough : null,
+                      decoration: TextDecoration.lineThrough,
+                      // decoration: false ? TextDecoration.lineThrough : null,
                     ),
               ),
             ),

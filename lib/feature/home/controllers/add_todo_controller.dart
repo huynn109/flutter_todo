@@ -15,12 +15,6 @@ class AddTodoController extends GetxController {
     super.onInit();
   }
 
-  @override
-  void onClose() {}
-
-  @override
-  void onReady() {}
-
   Future<void> saveTodo() async => handleResultSaveTodo(
         await insertTodoUseCase.call(Todo(text: "Test")),
       );

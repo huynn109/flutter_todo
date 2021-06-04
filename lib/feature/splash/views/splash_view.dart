@@ -27,7 +27,7 @@ class SplashView extends StatelessWidget {
             ),
           ).paddingOnly(
             bottom: 20.0,
-          )
+          ),
         ],
       ),
     );

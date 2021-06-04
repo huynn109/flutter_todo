@@ -39,17 +39,17 @@ dependencies:
   logger: any
   #IoC
   kiwi: 3.0.0-nullsafety.1
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  #UI
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  # code generators
+  #code generators
   build_runner: ^1.10.3
   kiwi_generator: 3.0.0-nullsafety-generator.4
+  #Analyzer
+  dart_code_metrics: ^3.2.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

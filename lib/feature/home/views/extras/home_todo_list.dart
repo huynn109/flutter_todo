@@ -23,6 +23,7 @@ class HomeTodoList extends GetView<HomeController> {
         case ViewState.data:
           return HomeTodoDataList();
       }
+
       return Container();
     });
   }
@@ -39,6 +40,7 @@ class HomeTodoDataList extends GetView<HomeController> {
       itemCount: controller.todoList.length,
       itemBuilder: (context, index) {
         var todoItem = controller.todoList.elementAt(index);
+
         return HomeTodoItem(
           todoItem: todoItem,
         );

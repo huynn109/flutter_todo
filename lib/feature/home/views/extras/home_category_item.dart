@@ -25,40 +25,50 @@ class HomeCategoryItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "${categoryItem?.todosNumber ?? 0} tasks",
-                style: Theme.of(context).textTheme.caption,
-              ),
-              SizedBox(
-                height: 4,
-              ),
-              Text(
-                categoryItem?.name ?? "",
-                style: Theme.of(context).textTheme.headline5,
-              ),
+              buildTextNumberOfTask(context),
+              SizedBox(height: 4),
+              buildTextName(context),
               Spacer(),
-              Expanded(
-                child: Align(
-                  child: Container(
-                    alignment: Alignment.bottomCenter,
-                    height: 8,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      child: LinearProgressIndicator(
-                        value: 0.7,
-                        valueColor: new AlwaysStoppedAnimation<Color>(
-                          Color(categoryItem?.color ?? 0xff00ff00),
-                        ),
-                        backgroundColor: const Color(COLOUR_GREY_DARK),
-                      ),
-                    ),
-                  ),
-                ),
-              )
+              buildIndicatorExpanded(),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Expanded buildIndicatorExpanded() {
+    return Expanded(
+      child: Align(
+        child: Container(
+          alignment: Alignment.bottomCenter,
+          height: 8,
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            child: LinearProgressIndicator(
+              value: 0.7,
+              valueColor: new AlwaysStoppedAnimation<Color>(
+                Color(categoryItem?.color ?? 0xff00ff00),
+              ),
+              backgroundColor: const Color(COLOUR_GREY_DARK),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Text buildTextName(BuildContext context) {
+    return Text(
+      categoryItem?.name ?? "",
+      style: Theme.of(context).textTheme.headline5,
+    );
+  }
+
+  Text buildTextNumberOfTask(BuildContext context) {
+    return Text(
+      "${categoryItem?.todosNumber ?? 0} tasks",
+      style: Theme.of(context).textTheme.caption,
     );
   }
 }

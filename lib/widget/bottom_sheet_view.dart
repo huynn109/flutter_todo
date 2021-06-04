@@ -42,12 +42,12 @@ class CustomBottomSheet extends StatefulWidget {
   /// Typically, bottom sheets are created implicitly by
   /// [ScaffoldState.showCustomBottomSheet], for persistent bottom sheets, or by
   /// [showModalCustomBottomSheet], for modal bottom sheets.
-  const CustomBottomSheet(
-      {Key? key,
-      required this.animationController,
-      required this.onClosing,
-      required this.builder})
-      : super(key: key);
+  const CustomBottomSheet({
+    Key? key,
+    required this.animationController,
+    required this.onClosing,
+    required this.builder,
+  }) : super(key: key);
 
   /// The animation that controls the bottom sheet's position.
   ///
@@ -88,6 +88,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
   double get _childHeight {
     final RenderBox? renderBox =
         _childKey.currentContext?.findRenderObject() as RenderBox;
+
     return renderBox?.size.height ?? 0;
   }
 
@@ -121,9 +122,10 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
-        onVerticalDragUpdate: _handleDragUpdate,
-        onVerticalDragEnd: _handleDragEnd,
-        child: new Material(key: _childKey, child: widget.builder(context)));
+      onVerticalDragUpdate: _handleDragUpdate,
+      onVerticalDragEnd: _handleDragEnd,
+      child: new Material(key: _childKey, child: widget.builder(context)),
+    );
   }
 }
 
@@ -142,16 +144,19 @@ class _ModalCustomBottomSheetLayout extends SingleChildLayoutDelegate {
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
     return new BoxConstraints(
-        minWidth: constraints.maxWidth,
-        maxWidth: constraints.maxWidth,
-        minHeight: 0.0,
-        maxHeight: constraints.maxHeight * 9.0 / 16.0);
+      minWidth: constraints.maxWidth,
+      maxWidth: constraints.maxWidth,
+      minHeight: 0.0,
+      maxHeight: constraints.maxHeight * 9.0 / 16.0,
+    );
   }
 
   @override
   Offset getPositionForChild(Size size, Size childSize) {
     return new Offset(
-        0.0, size.height - bottomInset - childSize.height * progress);
+      0.0,
+      size.height - bottomInset - childSize.height * progress,
+    );
   }
 
   @override
@@ -177,26 +182,31 @@ class _ModalCustomBottomSheetState<T>
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
-        onTap: widget.route.dismissOnTap ? () => Navigator.pop(context) : null,
-        child: new AnimatedBuilder(
-            animation: widget.route._animationController!,
-            builder: (BuildContext context, Widget? child) {
-              double bottomInset = widget.route.resizeToAvoidBottomPadding
-                  ? MediaQuery.of(context).viewInsets.bottom
-                  : 0.0;
-              return new ClipRect(
-                    child: new CustomSingleChildLayout(
-                      delegate: new _ModalCustomBottomSheetLayout(
-                          widget.route.animation?.value ?? 0, bottomInset),
-                      child: new CustomBottomSheet(
-                          animationController:
-                              widget.route._animationController!,
-                          onClosing: () => Navigator.pop(context),
-                          builder: widget.route.builder),
-                    ),
-                  ).child ??
-                  Container();
-            }));
+      onTap: widget.route.dismissOnTap ? () => Navigator.pop(context) : null,
+      child: new AnimatedBuilder(
+        animation: widget.route._animationController!,
+        builder: (BuildContext context, Widget? child) {
+          double bottomInset = widget.route.resizeToAvoidBottomPadding
+              ? MediaQuery.of(context).viewInsets.bottom
+              : 0.0;
+
+          return new ClipRect(
+                child: new CustomSingleChildLayout(
+                  delegate: new _ModalCustomBottomSheetLayout(
+                    widget.route.animation?.value ?? 0,
+                    bottomInset,
+                  ),
+                  child: new CustomBottomSheet(
+                    animationController: widget.route._animationController!,
+                    onClosing: () => Navigator.pop(context),
+                    builder: widget.route.builder,
+                  ),
+                ),
+              ).child ??
+              Container();
+        },
+      ),
+    );
   }
 }
 
@@ -233,13 +243,18 @@ class _ModalCustomBottomSheetRoute<T> extends PopupRoute<T> {
   AnimationController createAnimationController() {
     assert(_animationController == null);
     _animationController = CustomBottomSheet.createAnimationController(
-        navigator!.overlay as TickerProvider);
+      navigator!.overlay as TickerProvider,
+    );
+
     return _animationController!;
   }
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
     // By definition, the bottom sheet is aligned to the bottom of the page
     // and isn't exposed to the top padding of the MediaQuery.
     Widget bottomSheet = new MediaQuery.removePadding(
@@ -248,6 +263,7 @@ class _ModalCustomBottomSheetRoute<T> extends PopupRoute<T> {
       child: new _ModalCustomBottomSheet<T>(route: this),
     );
     bottomSheet = new Theme(data: theme, child: bottomSheet);
+
     return bottomSheet;
   }
 }
@@ -285,15 +301,15 @@ Future<T?>? showModalCustomBottomSheet<T>({
   bool resizeToAvoidBottomPadding: true,
 }) {
   return Navigator.push(
-      context,
-      new _ModalCustomBottomSheetRoute<T>(
-        builder: builder,
-        theme: Theme.of(context),
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        resizeToAvoidBottomPadding: resizeToAvoidBottomPadding,
-        dismissOnTap: dismissOnTap,
-      ));
+    context,
+    new _ModalCustomBottomSheetRoute<T>(
+      builder: builder,
+      theme: Theme.of(context),
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      resizeToAvoidBottomPadding: resizeToAvoidBottomPadding,
+      dismissOnTap: dismissOnTap,
+    ),
+  );
 }
 
 /// Shows a persistent material design bottom sheet in the nearest [Scaffold].
