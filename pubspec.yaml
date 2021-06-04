@@ -50,7 +50,6 @@ dev_dependencies:
   kiwi_generator: 3.0.0-nullsafety-generator.4
   #Analyzer
   dart_code_metrics: ^3.2.2
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

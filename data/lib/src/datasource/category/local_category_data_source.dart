@@ -5,6 +5,7 @@ import 'package:domain/domain.dart';
 
 abstract class ILocalCategory {
   Future<Either<Failure, List<Category>>> getCategoryList();
+
   Future<Either<Failure, bool>> insertCategoryList(List<Category> categoryList);
 }
 
@@ -20,7 +21,8 @@ class LocalCategoryDataSource implements ILocalCategory {
 
   @override
   Future<Either<Failure, bool>> insertCategoryList(
-      List<Category> categoryList) {
+    List<Category> categoryList,
+  ) {
     return todoDatabase.insertCategory(categoryList);
   }
 }

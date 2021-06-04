@@ -28,6 +28,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  #Analyzer
+  dart_code_metrics: ^3.2.2
   #network
   retrofit_generator: any
 

@@ -24,6 +24,7 @@ class SqfLiteDatabase extends TodoDatabase {
       final dbPath = join(dbFolder, _kDbFileName);
       await deleteDatabase(dbPath);
       _database = null;
+
       return true;
     } catch (_) {
       return false;
@@ -34,8 +35,13 @@ class SqfLiteDatabase extends TodoDatabase {
   Future<Either<Failure, List<TodoModel>>> getTodoList() async {
     final todoJsonList =
         await _database?.rawQuery('SELECT * FROM $_kDBTodoTableName');
-    return Right(
-        todoJsonList?.map((e) => TodoModel.fromJson(e)).toList() ?? []);
+
+    return Right(todoJsonList
+            ?.map(
+              (e) => TodoModel.fromJson(e),
+            )
+            .toList() ??
+        []);
   }
 
   @override
@@ -54,9 +60,11 @@ class SqfLiteDatabase extends TodoDatabase {
           await _initTodoTable(database);
         },
       );
+
       return Right(true);
     } on DatabaseException catch (e) {
       Logger.write(e.toString());
+
       return Left(Failure(e.toString()));
     }
   }
@@ -90,9 +98,11 @@ class SqfLiteDatabase extends TodoDatabase {
           },
         );
       }
+
       return true;
     } on DatabaseException catch (e) {
       print(e);
+
       return false;
     }
   }
@@ -121,15 +131,18 @@ class SqfLiteDatabase extends TodoDatabase {
             )''');
         },
       );
+
       return Right(todoModel.id ?? "");
     } on DatabaseException catch (e) {
       print(e);
+
       return Left(Failure(e.toString()));
     }
   }
 
   Future<Either<Failure, bool>> insertCategory(
-      List<Category> categoryList) async {
+    List<Category> categoryList,
+  ) async {
     if (categoryList.isEmpty) return Left(Failure("Category data is empty"));
     await removeAllCategoryList();
     final validatedCategoryList = validateCategoryDataList(categoryList);
@@ -138,13 +151,16 @@ class SqfLiteDatabase extends TodoDatabase {
         await _database?.transaction(
           (txn) async {
             await txn.rawInsert(
-                '''INSERT INTO $_kDBCategoryTableName (name, color, icon) VALUES("${category.name}", ${category.color}, ${category.icon})''');
+              '''INSERT INTO $_kDBCategoryTableName (name, color, icon) VALUES("${category.name}", ${category.color}, ${category.icon})''',
+            );
           },
         );
       }
+
       return Right(true);
     } on DatabaseException catch (e) {
       print(e);
+
       return Left(Failure(e.toString()));
     }
   }
@@ -189,6 +205,7 @@ class SqfLiteDatabase extends TodoDatabase {
       );
       validTodoList.add(validTodo);
     }
+
     return validTodoList;
   }
 
@@ -203,18 +220,21 @@ class SqfLiteDatabase extends TodoDatabase {
       );
       validCategoryList.add(validCategory);
     }
+
     return validCategoryList;
   }
 
   @override
   Future<bool> removeAllTodoList() async {
     await _database?.delete(_kDBTodoTableName);
+
     return true;
   }
 
   @override
   Future<bool> removeAllCategoryList() async {
     await _database?.delete(_kDBCategoryTableName);
+
     return true;
   }
 
@@ -222,8 +242,13 @@ class SqfLiteDatabase extends TodoDatabase {
   Future<Either<Failure, List<CategoryModel>>> getCategoryList() async {
     final categoryJsonList =
         await _database?.rawQuery('SELECT * FROM $_kDBCategoryTableName');
-    return Right(
-        categoryJsonList?.map((e) => CategoryModel.fromJson(e)).toList() ?? []);
+
+    return Right(categoryJsonList
+            ?.map(
+              (e) => CategoryModel.fromJson(e),
+            )
+            .toList() ??
+        []);
   }
 
   @override
@@ -234,9 +259,11 @@ class SqfLiteDatabase extends TodoDatabase {
         where: "id = ?",
         whereArgs: [id],
       );
+
       return Right(true);
     } on DatabaseException catch (e) {
       print(e);
+
       return Left(Failure(e.toString()));
     }
   }

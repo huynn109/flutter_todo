@@ -20,6 +20,7 @@ class TodoModel extends Todo {
     if (json['images'] != null) {
       (json['images'] as List).forEach((f) => images.add(f['src']));
     }
+
     return TodoModel(
       text: json['text'] ?? null,
       category: _getCategoriesFromJson(json),

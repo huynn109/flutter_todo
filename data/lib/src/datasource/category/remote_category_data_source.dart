@@ -17,10 +17,12 @@ class RemoteCategoryDataSource implements IRemoteCategory {
   Future<Either<Failure, List<Category>>> getCategoryList() async {
     try {
       final todoList = await client.getCategoryList(dotenv.env['API_KEY']);
+
       return Right(todoList);
     } on DioError catch (error) {
       print(error.type);
       print(error.message);
+
       return Left(Failure(error.message));
     } on Exception catch (_) {
       return const Left(Failure(ERROR_MSG));

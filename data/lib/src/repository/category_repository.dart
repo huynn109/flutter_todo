@@ -20,7 +20,8 @@ class CategoryRepositoryImpl implements CategoryRepository {
 
   @override
   Future<Either<Failure, bool>> insertCategoryList(
-      List<Category> categoryList) {
+    List<Category> categoryList,
+  ) {
     return localCategory.insertCategoryList(categoryList);
   }
 }
