@@ -11,6 +11,7 @@ class GetCategoryList extends UseCase<List<Category>, NoParams> {
   @override
   Future<Either<Failure, List<Category>>> call(NoParams params) async {
     await Future.delayed(const Duration(seconds: 1));
+
     return categoryRepository.getCategoryList();
   }
 }

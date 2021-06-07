@@ -1,12 +1,12 @@
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
+import 'package:data/data.dart';
 import 'package:data/src/service/retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
-import 'package:domain/domain.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 abstract class IRemoteTodo {
-  Future<Either<Failure, List<Todo>>> getTodoList();
+  Future<Either<Failure, List<TodoModel>>> getTodoList();
 }
 
 class RemoteTodoDataSource implements IRemoteTodo {
@@ -14,7 +14,7 @@ class RemoteTodoDataSource implements IRemoteTodo {
   RemoteTodoDataSource({required this.client});
 
   @override
-  Future<Either<Failure, List<Todo>>> getTodoList() async {
+  Future<Either<Failure, List<TodoModel>>> getTodoList() async {
     try {
       final todoList = await client.getTodoList(dotenv.env['API_KEY']);
 

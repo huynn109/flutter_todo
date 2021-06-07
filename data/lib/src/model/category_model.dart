@@ -1,7 +1,12 @@
 import 'package:domain/domain.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'category_model.g.dart';
+class CategoryModelKey {
+  static const name = 'name';
+  static const todosNumber = 'todosNumber';
+  static const color = 'color';
+  static const icon = 'icon';
+}
 
 @JsonSerializable()
 class CategoryModel extends Category {
@@ -17,7 +22,19 @@ class CategoryModel extends Category {
           icon: icon,
         );
 
-  factory CategoryModel.fromJson(Map<String, dynamic> json) =>
-      _$CategoryModelFromJson(json);
-  Map<String, dynamic> toJson() => _$CategoryModelToJson(this);
+  factory CategoryModel.fromJson(Map<String, dynamic> json) {
+    return CategoryModel(
+      name: json[CategoryModelKey.name] as String?,
+      todosNumber: json[CategoryModelKey.todosNumber] as int?,
+      color: json[CategoryModelKey.color] as int?,
+      icon: json[CategoryModelKey.icon] as int?,
+    );
+  }
+
+  Map<String, dynamic> toJson(CategoryModel categoryModel) => <String, dynamic>{
+        CategoryModelKey.name: categoryModel.name,
+        CategoryModelKey.color: categoryModel.color,
+        CategoryModelKey.todosNumber: categoryModel.todosNumber,
+        CategoryModelKey.icon: categoryModel.icon,
+      };
 }

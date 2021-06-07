@@ -9,6 +9,4 @@ abstract class UseCase<Type, Params> {
 class NoParams extends Equatable {
   @override
   List<Object> get props => [];
-
-  void test() {}
 }

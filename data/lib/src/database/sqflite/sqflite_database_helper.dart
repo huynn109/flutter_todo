@@ -70,12 +70,12 @@ class SqfLiteDatabase extends TodoDatabase {
   }
 
   @override
-  Future<bool> insertTodoList(List<TodoModel> todoList) async {
+  Future<bool> insertTodoList(List<Todo> todoList) async {
     if (todoList.isEmpty) return false;
     await removeAllTodoList();
     final validatedTodoList = validateTodoDataList(todoList);
     try {
-      for (final article in validatedTodoList) {
+      for (final todoModel in validatedTodoList) {
         await _database?.transaction(
           (txn) async {
             await txn.rawInsert('''
@@ -89,11 +89,11 @@ class SqfLiteDatabase extends TodoDatabase {
           )
           VALUES
             (
-              "${article.text}",
-              "${article.category}",
-              "${article.date}",
-              "${article.time}",
-              "${article.completed}"
+              "${todoModel.text}",
+              "${todoModel.category}",
+              "${todoModel.date}",
+              "${todoModel.time}",
+              "${todoModel.completed}"
             )''');
           },
         );
@@ -190,18 +190,18 @@ class SqfLiteDatabase extends TodoDatabase {
         ''');
   }
 
-  List<TodoModel> validateTodoDataList(List<TodoModel> todoList) {
+  List<TodoModel> validateTodoDataList(List<Todo> todoList) {
     final validTodoList = <TodoModel>[];
-    for (final todo in todoList) {
-      final validText = todo.text?.replaceAll('"', "'");
-      final validDate = todo.date?.replaceAll('"', "'");
-      final validTime = todo.time?.replaceAll('"', "'");
+    for (final todoItem in todoList) {
+      final validText = todoItem.text?.replaceAll('"', "'");
+      final validDate = todoItem.date?.replaceAll('"', "'");
+      final validTime = todoItem.time?.replaceAll('"', "'");
       final validTodo = TodoModel(
         text: validText,
-        category: todo.category,
+        category: todoItem.category,
         date: validDate,
         time: validTime,
-        completed: todo.completed,
+        completed: todoItem.completed,
       );
       validTodoList.add(validTodo);
     }
@@ -209,8 +209,10 @@ class SqfLiteDatabase extends TodoDatabase {
     return validTodoList;
   }
 
-  List<CategoryModel> validateCategoryDataList(List<Category> categoryList) {
-    final validCategoryList = <CategoryModel>[];
+  List<Category> validateCategoryDataList(
+    List<Category> categoryList,
+  ) {
+    final validCategoryList = <Category>[];
     for (final category in categoryList) {
       final validName = category.name?.replaceAll('"', "'");
       final validCategory = CategoryModel(

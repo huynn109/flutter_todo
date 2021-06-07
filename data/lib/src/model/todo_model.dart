@@ -1,40 +1,49 @@
+import 'package:data/src/model/category_model.dart';
 import 'package:domain/domain.dart';
 
+class TodoModelKey {
+  static const text = 'text';
+  static const category = 'category';
+  static const name = 'name';
+  static const date = 'date';
+  static const time = 'time';
+  static const completed = 'completed';
+}
+
 class TodoModel extends Todo {
+  String? id;
+  String? text;
+  Category? category;
+  String? date;
+  String? time;
+  bool completed;
+
   TodoModel({
-    String? text,
-    Category? category,
-    String? date,
-    String? time,
-    bool completed = false,
-  }) : super(
-          text: text,
-          category: category,
-          date: date,
-          time: time,
-          completed: completed,
-        );
+    this.text,
+    this.category,
+    this.date,
+    this.time,
+    this.completed = false,
+  }) : super();
 
   factory TodoModel.fromJson(Map<String, dynamic> json) {
-    List<String> images = [];
-    if (json['images'] != null) {
-      (json['images'] as List).forEach((f) => images.add(f['src']));
-    }
-
     return TodoModel(
-      text: json['text'] ?? null,
+      text: json[TodoModelKey.text] ?? null,
       category: _getCategoriesFromJson(json),
-      date: json['date'] ?? null,
-      time: json['time'] ?? null,
-      completed: json['completed'] != null ? true : false,
+      date: json[TodoModelKey.date] ?? null,
+      time: json[TodoModelKey.time] ?? null,
+      completed: json[TodoModelKey.completed] != null ? true : false,
     );
   }
 
-  static Category _getCategoriesFromJson(Map<String, dynamic> json) {
-    return Category(
-      name: json['name'] ?? null,
-      color: json['color'] != null ? (json['color'] as num).toInt() : null,
-      icon: json['icon'] != null ? (json['icon'] as num).toInt() : null,
-    );
-  }
+  Map<String, dynamic> toJson(TodoModel todoModel) => <String, dynamic>{
+        TodoModelKey.text: todoModel.text,
+        TodoModelKey.category: todoModel.category,
+        TodoModelKey.date: todoModel.date,
+        TodoModelKey.time: todoModel.time,
+        TodoModelKey.completed: todoModel.completed,
+      };
+
+  static CategoryModel _getCategoriesFromJson(Map<String, dynamic> json) =>
+      CategoryModel.fromJson(json);
 }
