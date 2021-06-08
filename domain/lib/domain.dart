@@ -11,4 +11,5 @@ export 'package:domain/src/usecases/category/insert_category.dart';
 export 'package:domain/src/usecases/database/init_database.dart';
 export 'package:domain/src/usecases/todo/get_todo_list.dart';
 export 'package:domain/src/usecases/todo/insert_todo.dart';
+export 'package:domain/src/usecases/todo/remove_todo_list.dart';
 export 'package:domain/src/usecases/usecase.dart';

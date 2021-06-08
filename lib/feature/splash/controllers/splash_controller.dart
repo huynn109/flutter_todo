@@ -6,11 +6,13 @@ import 'package:get/get.dart';
 class SplashController extends GetxController {
   final initDatabase = Injector.resolve<InitDatabase>();
   final insertCategoryList = Injector.resolve<InsertCategoryList>();
+  final removeToDoList = Injector.resolve<RemoveTodoList>();
 
   @override
   Future<void> onInit() async {
     super.onInit();
     await _initDatabase();
+    await _remoteTodoList();
     await _insertCategoryTable();
     gotoHome();
   }
@@ -25,4 +27,8 @@ class SplashController extends GetxController {
   }
 
   void gotoHome() => Get.offAndToNamed(Routes.HOME);
+
+  Future<void> _remoteTodoList() async {
+    await removeToDoList.call(NoParams());
+  }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_todo_simple/resources/resource.dart';
 
 class EmptyView extends StatelessWidget {
   const EmptyView({
@@ -37,13 +36,15 @@ class EmptyView extends StatelessWidget {
     String textContent,
   ) {
     return Container(
-      color: const Color(
-        COLOUR_GREY_LIGHT,
-      ),
       child: Center(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image(
+              width: 300,
+              image: AssetImage('assets/images/undraw_add_task.png'),
+            ),
             Text(
               title,
               style: Theme.of(context).textTheme.headline5,

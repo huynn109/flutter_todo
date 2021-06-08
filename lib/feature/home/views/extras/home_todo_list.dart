@@ -17,9 +17,7 @@ class HomeTodoList extends GetView<HomeController> {
         case ViewState.error:
           break;
         case ViewState.empty:
-          return EmptyView(
-            isExpanded: true,
-          );
+          return EmptyView();
         case ViewState.data:
           return HomeTodoDataList();
       }

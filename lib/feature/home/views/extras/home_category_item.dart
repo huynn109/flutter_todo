@@ -14,6 +14,10 @@ class HomeCategoryItem extends StatelessWidget {
       child: Card(
         elevation: 0,
         shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: const Color(COLOUR_GREY_DARK),
+            width: 2,
+          ),
           borderRadius: BorderRadius.all(
             Radius.circular(
               15,

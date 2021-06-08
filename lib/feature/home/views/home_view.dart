@@ -18,18 +18,20 @@ class HomeView extends StatelessWidget {
         actions: iconButtonActions(),
       ),
       body: Container(
-        color: const Color(COLOUR_GREY_LIGHT),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              SizedBox(height: 16),
-              HeaderView(),
-              SizedBox(height: 16),
-              HomeCategoryView(),
-              SizedBox(height: 16),
-              HomeTodoView(),
-            ],
+        child: Align(
+          alignment: Alignment.topLeft,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 16),
+                HeaderView(),
+                SizedBox(height: 16),
+                HomeCategoryView(),
+                SizedBox(height: 16),
+                HomeTodoView(),
+              ],
+            ),
           ),
         ),
       ),
