@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_todo_simple/gen/assets.gen.dart';
 
 class EmptyView extends StatelessWidget {
   const EmptyView({
@@ -43,7 +44,7 @@ class EmptyView extends StatelessWidget {
           children: [
             Image(
               width: 300,
-              image: AssetImage('assets/images/undraw_add_task.png'),
+              image: Assets.images.undrawAddTask,
             ),
             Text(
               title,
