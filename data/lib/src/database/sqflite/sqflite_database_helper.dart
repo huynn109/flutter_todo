@@ -168,7 +168,7 @@ class SqfLiteDatabase extends TodoDatabase {
   Future<void> _initCategoryTable(Database database) async {
     await database.execute('''
           CREATE TABLE $_kDBCategoryTableName(
-          id INTEGER PRIMARY KEY AUTOINCREMENT, 
+          id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
           name TEXT,
           color INTEGER,
           icon INTEGER
@@ -179,7 +179,7 @@ class SqfLiteDatabase extends TodoDatabase {
   Future<void> _initTodoTable(Database database) async {
     await database.execute('''
           CREATE TABLE $_kDBTodoTableName(
-          id INTEGER PRIMARY KEY AUTOINCREMENT, 
+          id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
           text TEXT,
           category INTEGER,
           date TEXT,
@@ -257,7 +257,7 @@ class SqfLiteDatabase extends TodoDatabase {
   Future<Either<Failure, bool>> removeTodoBy(String id) async {
     try {
       await _database?.delete(
-        _kDBTodoTableName, // replace with table name
+        _kDBTodoTableName,
         where: "id = ?",
         whereArgs: [id],
       );

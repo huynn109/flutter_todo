@@ -9,8 +9,6 @@ class GetTodoList extends UseCase<List<Todo>, NoParams> {
 
   @override
   Future<Either<Failure, List<Todo>>> call(NoParams params) async {
-    await Future.delayed(const Duration(seconds: 1));
-
     return localTodoRepository.getTodoList();
   }
 }

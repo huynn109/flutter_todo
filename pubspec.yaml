@@ -41,6 +41,8 @@ dependencies:
   kiwi: 3.0.0-nullsafety.1
   #UI
   cupertino_icons: ^1.0.2
+  #Slidable
+  flutter_slidable: 1.0.0-dev.2
 
 dev_dependencies:
   flutter_test:

@@ -16,7 +16,7 @@ class HomeCategoryItem extends StatelessWidget {
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: const Color(COLOUR_GREY_DARK),
-            width: 2,
+            width: 1,
           ),
           borderRadius: BorderRadius.all(
             Radius.circular(

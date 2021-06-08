@@ -1,9 +1,10 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_simple/di/injector.dart';
-import 'package:flutter_todo_simple/resources/resource.dart';
 import 'package:flutter_todo_simple/routes/app_pages.dart';
 import 'package:get/get.dart';
+
+import 'resources/color/color_utils.dart';
 
 void main() {
   Injector.setup();

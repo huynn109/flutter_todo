@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_simple/feature/home/controllers/home_controller.dart';
 import 'package:flutter_todo_simple/feature/home/views/extras/home_todo_item.dart';
@@ -37,10 +38,23 @@ class HomeTodoDataList extends GetView<HomeController> {
       scrollDirection: Axis.vertical,
       itemCount: controller.todoList.length,
       itemBuilder: (context, index) {
-        var todoItem = controller.todoList.elementAt(index);
+        Todo todoItem = controller.todoList.elementAt(index);
 
-        return HomeTodoItem(
-          todoItem: todoItem,
+        return Dismissible(
+          key: ValueKey(todoItem.id),
+          child: HomeTodoItem(
+            todoItem: todoItem,
+          ),
+          confirmDismiss: (direction) async {
+            switch (direction) {
+              case DismissDirection.endToStart:
+              case DismissDirection.startToEnd:
+                controller.removeTodoBy(todoItem.id);
+                break;
+              default:
+                break;
+            }
+          },
         );
       },
       separatorBuilder: (context, index) {

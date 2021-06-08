@@ -35,5 +35,6 @@ class _$Injector extends Injector {
     container.registerFactory((c) => InsertTodo(c<TodoRepository>()));
     container.registerFactory((c) => InitDatabase(c<DatabaseRepository>()));
     container.registerFactory((c) => RemoveTodoList(c<TodoRepository>()));
+    container.registerFactory((c) => RemoveTodo(c<TodoRepository>()));
   }
 }

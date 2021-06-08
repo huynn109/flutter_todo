@@ -51,6 +51,10 @@ class HomeTodoItem extends StatelessWidget {
 
   RoundedRectangleBorder roundedRectangleBorder() {
     return RoundedRectangleBorder(
+      side: BorderSide(
+        color: const Color(COLOUR_GREY_DARK),
+        width: 1,
+      ),
       borderRadius: BorderRadius.all(
         Radius.circular(
           15,

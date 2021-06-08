@@ -18,7 +18,6 @@ class SplashController extends GetxController {
   }
 
   Future<void> _initDatabase() async {
-    await Future.delayed(const Duration(seconds: 1));
     await initDatabase.call(NoParams());
   }
 

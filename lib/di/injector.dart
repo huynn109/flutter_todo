@@ -49,5 +49,6 @@ abstract class Injector {
   @Register.factory(InsertTodo)
   @Register.factory(InitDatabase)
   @Register.factory(RemoveTodoList)
+  @Register.factory(RemoveTodo)
   void _configureFeatureModuleFactories();
 }

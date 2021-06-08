@@ -8,6 +8,7 @@ class HomeController extends GetxController {
   final getCategoryList = Injector.resolve<GetCategoryList>();
   final getTodoList = Injector.resolve<GetTodoList>();
   final insertCategoryList = Injector.resolve<InsertCategoryList>();
+  final removeTodo = Injector.resolve<RemoveTodo>();
 
   final Rx<ViewState> viewState = ViewState.initial.obs;
   final RxList categoryList = [].obs;
@@ -62,6 +63,10 @@ class HomeController extends GetxController {
 
   void _setDataCategoryList(List<Category> categoryDataList) {
     categoryList.addAll(categoryDataList);
+  }
+
+  Future<void> removeTodoBy(String? id) async {
+    if (id != null) await removeTodo.call(ParamRemoveTodo(id));
   }
 
   void _setViewState(ViewState state) {
