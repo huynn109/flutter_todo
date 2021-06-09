@@ -12,7 +12,7 @@ class SplashController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     await _initDatabase();
-    await _remoteTodoList();
+    // await _remoteTodoList();
     await _insertCategoryTable();
     gotoHome();
   }

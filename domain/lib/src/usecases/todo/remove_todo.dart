@@ -17,7 +17,7 @@ class RemoveTodo extends UseCase<bool, ParamRemoveTodo> {
 class ParamRemoveTodo extends Equatable {
   ParamRemoveTodo(this.id);
 
-  final String id;
+  final int id;
 
   @override
   List<Object> get props => [];

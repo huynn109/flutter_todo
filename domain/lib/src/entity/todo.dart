@@ -1,7 +1,7 @@
 import 'package:domain/domain.dart';
 
 class Todo {
-  String? id;
+  int? id;
   String? text;
   Category? category;
   String? date;
@@ -9,6 +9,7 @@ class Todo {
   bool completed;
 
   Todo({
+    this.id,
     this.text,
     this.category,
     this.date,
@@ -25,13 +26,16 @@ class Todo {
     );
   }
 
+  // ignore: long-parameter-list
   Todo copyWith({
+    required int id,
     String? text,
     Category? category,
     String? date,
     bool? completed,
   }) {
     return Todo(
+      id: id,
       text: text ?? this.text,
       category: category ?? this.category,
       date: date ?? this.date,

@@ -108,7 +108,7 @@ class SqfLiteDatabase extends TodoDatabase {
   }
 
   @override
-  Future<Either<Failure, String>> insertTodo(Todo todoModel) async {
+  Future<Either<Failure, int>> insertTodo(Todo todoModel) async {
     try {
       await _database?.transaction(
         (txn) async {
@@ -132,7 +132,7 @@ class SqfLiteDatabase extends TodoDatabase {
         },
       );
 
-      return Right(todoModel.id ?? "");
+      return Right(todoModel.id ?? -1);
     } on DatabaseException catch (e) {
       print(e);
 
@@ -197,6 +197,7 @@ class SqfLiteDatabase extends TodoDatabase {
       final validDate = todoItem.date?.replaceAll('"', "'");
       final validTime = todoItem.time?.replaceAll('"', "'");
       final validTodo = TodoModel(
+        id: 0,
         text: validText,
         category: todoItem.category,
         date: validDate,
@@ -254,7 +255,7 @@ class SqfLiteDatabase extends TodoDatabase {
   }
 
   @override
-  Future<Either<Failure, bool>> removeTodoBy(String id) async {
+  Future<Either<Failure, bool>> removeTodoBy(int id) async {
     try {
       await _database?.delete(
         _kDBTodoTableName,

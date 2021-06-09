@@ -6,10 +6,10 @@ import 'package:domain/domain.dart';
 abstract class ILocalTodo {
   Future<Either<Failure, List<Todo>>> getTodoList();
 
-  Future<Either<Failure, String>> insertTodo(Todo todo);
+  Future<Either<Failure, int>> insertTodo(Todo todo);
 
   Future<Either<Failure, bool>> removeTodoList();
-  Future<Either<Failure, bool>> removeTodoBy(String id);
+  Future<Either<Failure, bool>> removeTodoBy(int id);
 }
 
 class LocalTodoDataSource implements ILocalTodo {
@@ -25,7 +25,7 @@ class LocalTodoDataSource implements ILocalTodo {
   }
 
   @override
-  Future<Either<Failure, String>> insertTodo(Todo todo) async {
+  Future<Either<Failure, int>> insertTodo(Todo todo) async {
     return await todoDatabase.insertTodo(todo);
   }
 
@@ -35,7 +35,7 @@ class LocalTodoDataSource implements ILocalTodo {
   }
 
   @override
-  Future<Either<Failure, bool>> removeTodoBy(String id) async {
+  Future<Either<Failure, bool>> removeTodoBy(int id) async {
     return await todoDatabase.removeTodoBy(id);
   }
 }

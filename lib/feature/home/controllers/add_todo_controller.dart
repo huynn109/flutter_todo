@@ -17,10 +17,13 @@ class AddTodoController extends GetxController {
     super.onInit();
   }
 
-  Future<void> saveTodo() async =>
-      handleResultSaveTodo(await insertTodoUseCase.call(Todo(text: "Test")));
+  Future<void> saveTodo() async => handleResultSaveTodo(
+        await insertTodoUseCase.call(
+          Todo(text: "Hello"),
+        ),
+      );
 
-  void handleResultSaveTodo(Either<Failure, String> resultSaveTodo) {
+  void handleResultSaveTodo(Either<Failure, int> resultSaveTodo) {
     resultSaveTodo.fold(
       (l) => Logger.write(l.message),
       (r) {

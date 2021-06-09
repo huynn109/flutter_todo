@@ -19,7 +19,7 @@ class TodoRepositoryImpl extends TodoRepository {
   }
 
   @override
-  Future<Either<Failure, String>> insertTodo(Todo todo) {
+  Future<Either<Failure, int>> insertTodo(Todo todo) {
     return localTodo.insertTodo(todo);
   }
 
@@ -29,7 +29,7 @@ class TodoRepositoryImpl extends TodoRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> removeTodoBy(String id) {
+  Future<Either<Failure, bool>> removeTodoBy(int id) {
     return localTodo.removeTodoBy(id);
   }
 }

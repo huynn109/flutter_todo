@@ -43,8 +43,11 @@ class HomeController extends GetxController {
   }
 
   void _setDataTodoList(List<Todo> data) {
-    viewState.value = ViewState.data;
+    todoList.clear();
     todoList.addAll(data);
+    if (viewState.value != ViewState.data) {
+      _setViewState(ViewState.data);
+    }
   }
 
   void _setEmptyTodoList() => viewState.value = ViewState.empty;
@@ -65,8 +68,15 @@ class HomeController extends GetxController {
     categoryList.addAll(categoryDataList);
   }
 
-  Future<void> removeTodoBy(String? id) async {
-    if (id != null) await removeTodo.call(ParamRemoveTodo(id));
+  Future<void> removeTodoBy(int? id) async {
+    if (id != null)
+      handleResultInsertTodo(await removeTodo.call(ParamRemoveTodo(id)));
+  }
+
+  void handleResultInsertTodo(Either<Failure, bool> resultInsertTodo) {
+    resultInsertTodo.fold((l) => null, (result) {
+      if (result) loadTodoList();
+    });
   }
 
   void _setViewState(ViewState state) {

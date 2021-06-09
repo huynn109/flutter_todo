@@ -57,7 +57,10 @@ class HomeAddTodoView extends GetView<AddTodoController> {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onPressed: () => controller.saveTodo(),
+      onPressed: () {
+        controller.saveTodo();
+        Get.back();
+      },
     );
   }
 

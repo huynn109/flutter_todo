@@ -31,35 +31,37 @@ class HomeTodoList extends GetView<HomeController> {
 class HomeTodoDataList extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      primary: false,
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      scrollDirection: Axis.vertical,
-      itemCount: controller.todoList.length,
-      itemBuilder: (context, index) {
-        Todo todoItem = controller.todoList.elementAt(index);
+    return Obx(() {
+      return ListView.separated(
+        primary: false,
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        itemCount: controller.todoList.length,
+        itemBuilder: (context, index) {
+          Todo todoItem = controller.todoList.elementAt(index);
 
-        return Dismissible(
-          key: ValueKey(todoItem.id),
-          child: HomeTodoItem(
-            todoItem: todoItem,
-          ),
-          confirmDismiss: (direction) async {
-            switch (direction) {
-              case DismissDirection.endToStart:
-              case DismissDirection.startToEnd:
-                controller.removeTodoBy(todoItem.id);
-                break;
-              default:
-                break;
-            }
-          },
-        );
-      },
-      separatorBuilder: (context, index) {
-        return SizedBox(height: 4);
-      },
-    );
+          return Dismissible(
+            key: ValueKey(todoItem.id),
+            child: HomeTodoItem(
+              todoItem: todoItem,
+            ),
+            confirmDismiss: (direction) async {
+              switch (direction) {
+                case DismissDirection.endToStart:
+                case DismissDirection.startToEnd:
+                  controller.removeTodoBy(todoItem.id);
+                  break;
+                default:
+                  break;
+              }
+            },
+          );
+        },
+        separatorBuilder: (context, index) {
+          return SizedBox(height: 4);
+        },
+      );
+    });
   }
 }

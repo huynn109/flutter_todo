@@ -11,7 +11,7 @@ abstract class TodoDatabase {
     List<Category> categoryList,
   );
 
-  Future<Either<Failure, String>> insertTodo(Todo todoModel);
+  Future<Either<Failure, int>> insertTodo(Todo todoModel);
 
   Future<bool> insertTodoList(List<Todo> todoModelList);
 
@@ -19,7 +19,7 @@ abstract class TodoDatabase {
 
   Future<bool> removeAllTodoList();
 
-  Future<Either<Failure, bool>> removeTodoBy(String id);
+  Future<Either<Failure, bool>> removeTodoBy(int id);
 
   Future<Either<Failure, List<Category>>> getCategoryList();
 
