@@ -15,51 +15,13 @@ class SqfLiteDatabase extends TodoDatabase {
   Database? _database;
 
   @override
-  Future<bool> deleteDb() async {
-    try {
-      final dbFolder = await getDatabasesPath();
-      if (!await Directory(dbFolder).exists()) {
-        await Directory(dbFolder).create(recursive: true);
-      }
-      final dbPath = join(dbFolder, _kDbFileName);
-      await deleteDatabase(dbPath);
-      _database = null;
-
-      return true;
-    } catch (_) {
-      return false;
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<TodoModel>>> getTodoList() async {
-    final todoJsonList =
-        await _database?.rawQuery('SELECT * FROM $_kDBTodoTableName');
-
-    return Right(todoJsonList
-            ?.map(
-              (e) => TodoModel.fromJson(e),
-            )
-            .toList() ??
-        []);
-  }
-
-  @override
   Future<Either<Failure, bool>> initDb() async {
     try {
-      final dbPath = await getDatabasesPath();
-      if (!await Directory(dbPath).exists()) {
-        await Directory(dbPath).create(recursive: true);
+      String dbFolderPath = await getDbFolderPath();
+      if (await dbPathNotExists(dbFolderPath)) {
+        await createDbPathWith(dbFolderPath);
       }
-      final dbPathWithName = join(dbPath, _kDbFileName);
-      _database = await openDatabase(
-        dbPathWithName,
-        version: _kDBVersion,
-        onCreate: (database, version) async {
-          await _initCategoryTable(database);
-          await _initTodoTable(database);
-        },
-      );
+      await createDbTable(await getDbPath());
 
       return Right(true);
     } on DatabaseException catch (e) {
@@ -67,6 +29,76 @@ class SqfLiteDatabase extends TodoDatabase {
 
       return Left(Failure(e.toString()));
     }
+  }
+
+  Future<void> createDbPathWith(String path) async {
+    await Directory(path).create(recursive: true);
+  }
+
+  Future<void> createDbTable(String dbPath) async {
+    _database = await openDatabase(
+      dbPath,
+      version: _kDBVersion,
+      onCreate: (database, version) async {
+        await _initCategoryTable(database);
+        await _initTodoTable(database);
+      },
+    );
+  }
+
+  Future<bool> dbPathExists(String dbPath) async =>
+      await Directory(dbPath).exists();
+
+  Future<bool> dbPathNotExists(String dbPath) async =>
+      !await Directory(dbPath).exists();
+
+  @override
+  Future<bool> deleteDb() async {
+    try {
+      String dbPath = await getDbPath();
+      if (await dbPathExists(dbPath)) {
+        await deleteDatabase(dbPath);
+        _database = null;
+      }
+
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  Future<String> getDbFolderPath() async {
+    final dbFolder = await getDatabasesPath();
+
+    return dbFolder;
+  }
+
+  Future<String> getDbPath() async {
+    final dbPath = join(await getDbFolderPath(), _kDbFileName);
+
+    return dbPath;
+  }
+
+  @override
+  Future<Either<Failure, List<TodoModel>>> getTodoList() async {
+    final todoJsonList = await _database?.query(
+      _kDBTodoTableName,
+    );
+    if (todoJsonList == null) {
+      Logger.write("Todo is null");
+
+      return Left(
+        Failure("Todo is null"),
+      );
+    }
+
+    return Right(
+      List<TodoModel>.from(
+        todoJsonList.map(
+          (e) => TodoModel.fromJson(e),
+        ),
+      ),
+    );
   }
 
   @override
@@ -108,31 +140,32 @@ class SqfLiteDatabase extends TodoDatabase {
   }
 
   @override
-  Future<Either<Failure, int>> insertTodo(Todo todoModel) async {
+  Future<Either<Failure, int>> insertTodo(TodoModel todoModel) async {
     try {
-      await _database?.transaction(
-        (txn) async {
-          await txn.rawInsert('''
-          INSERT INTO $_kDBTodoTableName 
-          (
-          text,
-          category,
-          date,
-          time,
-          completed
-          )
-          VALUES
-            (
-              "${todoModel.text}",
-              "${todoModel.category}",
-              "${todoModel.date}",
-              "${todoModel.time}",
-              "${todoModel.completed}"
-            )''');
-        },
-      );
+      // await _database?.transaction(
+      //   (txn) async {
+      //     await txn.rawInsert('''
+      //     INSERT INTO $_kDBTodoTableName
+      //     (
+      //     text,
+      //     category,
+      //     date,
+      //     time,
+      //     completed
+      //     )
+      //     VALUES
+      //       (
+      //         "${todoModel.text}",
+      //         "${todoModel.category}",
+      //         "${todoModel.date}",
+      //         "${todoModel.time}",
+      //         "${todoModel.completed}"
+      //       )''');
+      //   },
+      // );
+      var id = await _database?.insert(_kDBTodoTableName, todoModel.toJson());
 
-      return Right(todoModel.id ?? -1);
+      return Right(id ?? -1);
     } on DatabaseException catch (e) {
       print(e);
 

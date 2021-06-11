@@ -13,3 +13,4 @@ export 'package:data/src/repository/category_repository.dart';
 export 'package:data/src/repository/database_repository.dart';
 export 'package:data/src/repository/todo_repository.dart';
 export 'package:data/src/service/retrofit/retrofit.dart';
+export 'package:data/src/mapper/todo_mapper.dart';

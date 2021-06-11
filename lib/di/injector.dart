@@ -35,14 +35,23 @@ abstract class Injector {
   }
 
   @Register.singleton(TodoDatabase, from: SqfLiteDatabase)
+
+  // Mapper
+  @Register.factory(TodoMapper)
+
+  // Data source
   @Register.factory(IRemoteCategory, from: RemoteCategoryDataSource)
   @Register.factory(ILocalCategory, from: LocalCategoryDataSource)
   @Register.factory(ILocalTodo, from: LocalTodoDataSource)
   @Register.factory(IRemoteTodo, from: RemoteTodoDataSource)
+  @Register.factory(IDatabaseManager, from: DatabaseManagerDataSource)
+
+  // Repository
   @Register.factory(CategoryRepository, from: CategoryRepositoryImpl)
   @Register.factory(TodoRepository, from: TodoRepositoryImpl)
-  @Register.factory(IDatabaseManager, from: DatabaseManagerDataSource)
   @Register.factory(DatabaseRepository, from: DatabaseRepositoryImpl)
+
+  // Use case
   @Register.factory(GetCategoryList)
   @Register.factory(GetTodoList)
   @Register.factory(InsertCategoryList)

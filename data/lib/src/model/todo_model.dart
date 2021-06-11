@@ -39,14 +39,19 @@ class TodoModel extends Todo {
     );
   }
 
-  Map<String, dynamic> toJson(TodoModel todoModel) => <String, dynamic>{
-        TodoModelKey.id: todoModel.id,
-        TodoModelKey.text: todoModel.text,
-        TodoModelKey.category: todoModel.category,
-        TodoModelKey.date: todoModel.date,
-        TodoModelKey.time: todoModel.time,
-        TodoModelKey.completed: todoModel.completed,
-      };
+  Map<String, dynamic> toJson() {
+    var map = <String, dynamic>{
+      TodoModelKey.text: text,
+      TodoModelKey.category: category,
+      TodoModelKey.date: date,
+      TodoModelKey.time: time,
+      TodoModelKey.completed: completed,
+    };
+    if (id != null) {
+      map[TodoModelKey.id] = id;
+    }
+    return map;
+  }
 
   static CategoryModel _getCategoriesFromJson(Map<String, dynamic> json) =>
       CategoryModel.fromJson(json);

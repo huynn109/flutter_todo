@@ -11,6 +11,7 @@ class _$Injector extends Injector {
   void _configureFeatureModuleFactories() {
     final KiwiContainer container = KiwiContainer();
     container.registerSingleton<TodoDatabase>((c) => SqfLiteDatabase());
+    container.registerFactory((c) => TodoMapper());
     container.registerFactory<IRemoteCategory>(
         (c) => RemoteCategoryDataSource(client: c<RestClient>()));
     container.registerFactory<ILocalCategory>(
@@ -19,13 +20,15 @@ class _$Injector extends Injector {
         (c) => LocalTodoDataSource(todoDatabase: c<TodoDatabase>()));
     container.registerFactory<IRemoteTodo>(
         (c) => RemoteTodoDataSource(client: c<RestClient>()));
+    container.registerFactory<IDatabaseManager>(
+        (c) => DatabaseManagerDataSource(c<TodoDatabase>()));
     container.registerFactory<CategoryRepository>((c) => CategoryRepositoryImpl(
         remoteCategory: c<IRemoteCategory>(),
         localCategory: c<ILocalCategory>()));
     container.registerFactory<TodoRepository>((c) => TodoRepositoryImpl(
-        localTodo: c<ILocalTodo>(), remoteTodo: c<IRemoteTodo>()));
-    container.registerFactory<IDatabaseManager>(
-        (c) => DatabaseManagerDataSource(c<TodoDatabase>()));
+        localTodo: c<ILocalTodo>(),
+        remoteTodo: c<IRemoteTodo>(),
+        todoMapper: c<TodoMapper>()));
     container.registerFactory<DatabaseRepository>(
         (c) => DatabaseRepositoryImpl(c<IDatabaseManager>()));
     container.registerFactory((c) => GetCategoryList(c<CategoryRepository>()));

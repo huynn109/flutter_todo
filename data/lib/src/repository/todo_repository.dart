@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
+import 'package:data/data.dart';
 import 'package:data/src/datasource/todo/local_todo_data_source.dart';
 import 'package:data/src/datasource/todo/remote_todo_data_source.dart';
 import 'package:domain/domain.dart';
@@ -8,10 +9,12 @@ class TodoRepositoryImpl extends TodoRepository {
   TodoRepositoryImpl({
     required this.localTodo,
     required this.remoteTodo,
+    required this.todoMapper,
   });
 
   final ILocalTodo localTodo;
   final IRemoteTodo remoteTodo;
+  final TodoMapper todoMapper;
 
   @override
   Future<Either<Failure, List<Todo>>> getTodoList() {
@@ -20,7 +23,9 @@ class TodoRepositoryImpl extends TodoRepository {
 
   @override
   Future<Either<Failure, int>> insertTodo(Todo todo) {
-    return localTodo.insertTodo(todo);
+    return localTodo.insertTodo(
+      todoMapper.fromEntity(todo),
+    );
   }
 
   @override

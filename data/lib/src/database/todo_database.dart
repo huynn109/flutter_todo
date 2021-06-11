@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
+import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 
 abstract class TodoDatabase {
@@ -11,7 +12,7 @@ abstract class TodoDatabase {
     List<Category> categoryList,
   );
 
-  Future<Either<Failure, int>> insertTodo(Todo todoModel);
+  Future<Either<Failure, int>> insertTodo(TodoModel todoModel);
 
   Future<bool> insertTodoList(List<Todo> todoModelList);
 
