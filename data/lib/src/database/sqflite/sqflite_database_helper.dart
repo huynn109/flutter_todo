@@ -142,27 +142,6 @@ class SqfLiteDatabase extends TodoDatabase {
   @override
   Future<Either<Failure, int>> insertTodo(TodoModel todoModel) async {
     try {
-      // await _database?.transaction(
-      //   (txn) async {
-      //     await txn.rawInsert('''
-      //     INSERT INTO $_kDBTodoTableName
-      //     (
-      //     text,
-      //     category,
-      //     date,
-      //     time,
-      //     completed
-      //     )
-      //     VALUES
-      //       (
-      //         "${todoModel.text}",
-      //         "${todoModel.category}",
-      //         "${todoModel.date}",
-      //         "${todoModel.time}",
-      //         "${todoModel.completed}"
-      //       )''');
-      //   },
-      // );
       var id = await _database?.insert(_kDBTodoTableName, todoModel.toJson());
 
       return Right(id ?? -1);

@@ -45,11 +45,12 @@ class TodoModel extends Todo {
       TodoModelKey.category: category,
       TodoModelKey.date: date,
       TodoModelKey.time: time,
-      TodoModelKey.completed: completed,
+      TodoModelKey.completed: completed ? 0 : 1,
     };
     if (id != null) {
       map[TodoModelKey.id] = id;
     }
+
     return map;
   }
 

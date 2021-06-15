@@ -8,8 +8,8 @@ import 'package:get/get.dart';
 
 class AddTodoController extends GetxController {
   final _homeController = Get.find<HomeController>();
-  GlobalKey addTodoFormKey = GlobalKey<FormState>();
-  final TextEditingController inputTodoController = TextEditingController();
+  final addTodoFormKey = GlobalKey<FormState>();
+  final inputTodoController = TextEditingController();
   final insertTodoUseCase = Injector.resolve<InsertTodo>();
 
   @override
@@ -17,16 +17,21 @@ class AddTodoController extends GetxController {
     super.onInit();
   }
 
-  Future<void> saveTodo() async => handleResultSaveTodo(
+  Future<void> saveTodo() async =>
+      handleResultSaveTodo(
         await insertTodoUseCase.call(
-          Todo(text: "Hello"),
+          ParamAddTodo(
+            Todo(
+              text: inputTodoController.text,
+            ),
+          ),
         ),
       );
 
   void handleResultSaveTodo(Either<Failure, int> resultSaveTodo) {
     resultSaveTodo.fold(
-      (l) => Logger.write(l.message),
-      (r) {
+          (l) => Logger.write(l.message),
+          (r) {
         _homeController.loadTodoList();
       },
     );
