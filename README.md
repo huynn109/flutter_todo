@@ -1,7 +1,7 @@
 ## flutter todo app
 
-    Build a Todo app with clean architecture. 
-    You can learn how to implement the architecture here: [https://github.com/ResoCoder/flutter-tdd-clean-architecture-course](Thanks [https://resocoder.com](resocoder) )
+- Build a Todo app with clean architecture. 
+- You can learn how to implement the architecture here: [Thanks resocoder](https://github.com/ResoCoder/flutter-tdd-clean-architecture-course)
 
 Made with:
 - [Getx](https://github.com/jonataslaw/getx)
