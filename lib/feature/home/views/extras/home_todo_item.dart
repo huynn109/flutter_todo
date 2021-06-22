@@ -1,8 +1,9 @@
-import 'package:core/core.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_simple/feature/home/controllers/home_controller.dart';
 import 'package:flutter_todo_simple/resources/resource.dart';
 import 'package:flutter_todo_simple/widget/todo_circle_checkbox.dart';
+import 'package:get/get.dart';
 
 class HomeTodoItem extends StatelessWidget {
   HomeTodoItem({
@@ -10,6 +11,7 @@ class HomeTodoItem extends StatelessWidget {
     required this.todoItem,
   }) : super(key: key);
 
+  final homeController = Get.find<HomeController>();
   final Todo todoItem;
 
   @override
@@ -26,11 +28,11 @@ class HomeTodoItem extends StatelessWidget {
                 right: 16,
               ),
               child: CircularCheckBox(
-                isChecked: false,
+                isChecked: todoItem.completed,
                 borderColor: Colors.green,
                 checkedColor: const Color(COLOUR_GREY_DARK_100),
                 onChange: (valueChange) {
-                  Logger.write(valueChange.toString());
+                  homeController.completeTodo(todoItem.id);
                 },
               ),
             ),
@@ -38,8 +40,9 @@ class HomeTodoItem extends StatelessWidget {
               child: Text(
                 todoItem.text ?? '',
                 style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                      decoration: TextDecoration.lineThrough,
-                      // decoration: false ? TextDecoration.lineThrough : null,
+                      decoration: todoItem.completed == true
+                          ? TextDecoration.lineThrough
+                          : null,
                     ),
               ),
             ),

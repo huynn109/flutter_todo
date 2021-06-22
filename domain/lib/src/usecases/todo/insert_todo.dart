@@ -9,8 +9,8 @@ class InsertTodo extends UseCase<int, ParamAddTodo> {
   TodoRepository localTodoRepository;
 
   @override
-  Future<Either<Failure, int>> call(ParamAddTodo params) {
-    return localTodoRepository.insertTodo(params.todo);
+  Future<Either<Failure, int>> call(ParamAddTodo paramAddTodo) {
+    return localTodoRepository.insertTodo(paramAddTodo.todo);
   }
 }
 

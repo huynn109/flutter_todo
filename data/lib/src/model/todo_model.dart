@@ -35,7 +35,10 @@ class TodoModel extends Todo {
       category: _getCategoriesFromJson(json),
       date: json[TodoModelKey.date] ?? null,
       time: json[TodoModelKey.time] ?? null,
-      completed: json[TodoModelKey.completed] != null ? true : false,
+      completed: (json[TodoModelKey.completed] != null &&
+              json[TodoModelKey.completed] == 1)
+          ? true
+          : false,
     );
   }
 
@@ -45,7 +48,7 @@ class TodoModel extends Todo {
       TodoModelKey.category: category,
       TodoModelKey.date: date,
       TodoModelKey.time: time,
-      TodoModelKey.completed: completed ? 0 : 1,
+      TodoModelKey.completed: completed ? 1 : 0,
     };
     if (id != null) {
       map[TodoModelKey.id] = id;

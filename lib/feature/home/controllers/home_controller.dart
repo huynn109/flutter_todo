@@ -9,6 +9,7 @@ class HomeController extends GetxController {
   final getTodoList = Injector.resolve<GetTodoList>();
   final insertCategoryList = Injector.resolve<InsertCategoryList>();
   final removeTodo = Injector.resolve<RemoveTodo>();
+  final updateTodo = Injector.resolve<UpdateTodo>();
 
   final Rx<ViewState> viewState = ViewState.initial.obs;
   final RxList categoryList = [].obs;
@@ -81,5 +82,9 @@ class HomeController extends GetxController {
 
   void _setViewState(ViewState state) {
     viewState.value = state;
+  }
+
+  void completeTodo(int id) {
+    updateTodo.call(paramUpdateTodo)
   }
 }
