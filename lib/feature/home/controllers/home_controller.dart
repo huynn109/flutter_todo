@@ -84,7 +84,7 @@ class HomeController extends GetxController {
     viewState.value = state;
   }
 
-  void completeTodo(int id) {
-    updateTodo.call(paramUpdateTodo)
+  void completeTodo(int? id) {
+    updateTodo.call(ParamUpdateTodo(id));
   }
 }

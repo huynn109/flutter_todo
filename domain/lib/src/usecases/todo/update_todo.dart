@@ -10,14 +10,14 @@ class UpdateTodo extends UseCase<bool, ParamUpdateTodo> {
 
   @override
   Future<Either<Failure, bool>> call(ParamUpdateTodo paramUpdateTodo) {
-    return localTodoRepository.updateTodo(paramUpdateTodo.id);
+    return localTodoRepository.updateTodo();
   }
 }
 
 class ParamUpdateTodo extends Equatable {
   ParamUpdateTodo(this.id);
 
-  final int id;
+  final int? id;
 
   @override
   List<Object> get props => [];

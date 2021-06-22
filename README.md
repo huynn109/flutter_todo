@@ -1,16 +1,13 @@
-# flutter_todo_simple
+## flutter_todo_simple
 
-A new Flutter project.
+Build a Todo app with clean architecture. 
+You can learn how to implement the architecture here: [https://github.com/ResoCoder/flutter-tdd-clean-architecture-course](Thanks [https://resocoder.com](resocoder) )
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Made with:
+- [Getx](https://github.com/jonataslaw/getx)
+- [Get CLI](https://github.com/jonataslaw/get_cli)
+- [DartZ](https://github.com/spebbe/dartz)
+- [Kiwi](https://github.com/vanlooverenkoen/kiwi)
+- [Sqflite](https://github.com/tekartik/sqflite)
+- [Dart metrics](https://github.com/dart-code-checker/dart-code-metrics)
+- [Flutter gen](https://github.com/FlutterGen/flutter_gen)
