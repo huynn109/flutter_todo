@@ -7,5 +7,5 @@ abstract class TodoRepository {
   Future<Either<Failure, int>> insertTodo(Todo todo);
   Future<Either<Failure, bool>> removeTodoList();
   Future<Either<Failure, bool>> removeTodoBy(int id);
-  Future<Either<Failure, bool>> updateTodo(int id);
+  Future<Either<Failure, bool>> updateTodo(Todo todo);
 }

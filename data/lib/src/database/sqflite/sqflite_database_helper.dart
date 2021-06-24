@@ -282,4 +282,22 @@ class SqfLiteDatabase extends TodoDatabase {
       return Left(Failure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> updateTodo(TodoModel todoModel) async {
+    try {
+      await _database?.update(
+        _kDBTodoTableName,
+        todoModel.toJson(),
+        where: "id = ?",
+        whereArgs: [todoModel.id],
+      );
+
+      return Right(true);
+    } on DatabaseException catch (e) {
+      print(e);
+
+      return Left(Failure(e.toString()));
+    }
+  }
 }

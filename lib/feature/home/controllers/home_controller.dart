@@ -9,7 +9,7 @@ class HomeController extends GetxController {
   final getTodoList = Injector.resolve<GetTodoList>();
   final insertCategoryList = Injector.resolve<InsertCategoryList>();
   final removeTodo = Injector.resolve<RemoveTodo>();
-  final updateTodo = Injector.resolve<UpdateTodo>();
+  final revertCompleteTodo = Injector.resolve<RevertCompleteTodo>();
 
   final Rx<ViewState> viewState = ViewState.initial.obs;
   final RxList categoryList = [].obs;
@@ -71,7 +71,11 @@ class HomeController extends GetxController {
 
   Future<void> removeTodoBy(int? id) async {
     if (id != null)
-      handleResultInsertTodo(await removeTodo.call(ParamRemoveTodo(id)));
+      handleResultInsertTodo(
+        await removeTodo.call(
+          ParamRemoveTodo(id),
+        ),
+      );
   }
 
   void handleResultInsertTodo(Either<Failure, bool> resultInsertTodo) {
@@ -84,7 +88,17 @@ class HomeController extends GetxController {
     viewState.value = state;
   }
 
-  void completeTodo(int? id) {
-    updateTodo.call(ParamUpdateTodo(id));
+  Future<void> completeTodo(Todo todo) async {
+    handleResultUpdateTodo(
+      await revertCompleteTodo.call(
+        ParamUpdateTodo(todo),
+      ),
+    );
+  }
+
+  void handleResultUpdateTodo(Either<Failure, bool> revertCompleteTodo) {
+    revertCompleteTodo.fold((l) => null, (result) {
+      if (result) loadTodoList();
+    });
   }
 }

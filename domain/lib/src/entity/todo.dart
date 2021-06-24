@@ -28,7 +28,6 @@ class Todo {
 
   // ignore: long-parameter-list
   Todo copyWith({
-    required int id,
     String? text,
     Category? category,
     String? date,

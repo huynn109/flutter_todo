@@ -45,7 +45,6 @@ class TodoModel extends Todo {
   Map<String, dynamic> toJson() {
     var map = <String, dynamic>{
       TodoModelKey.text: text,
-      TodoModelKey.category: category,
       TodoModelKey.date: date,
       TodoModelKey.time: time,
       TodoModelKey.completed: completed ? 1 : 0,

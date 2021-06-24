@@ -31,19 +31,23 @@ class HomeTodoItem extends StatelessWidget {
                 isChecked: todoItem.completed,
                 borderColor: Colors.green,
                 checkedColor: const Color(COLOUR_GREY_DARK_100),
-                onChange: (valueChange) {
-                  homeController.completeTodo(todoItem.id);
-                },
+                onChange: (valueChange) =>
+                    homeController.completeTodo(todoItem),
               ),
             ),
             Expanded(
-              child: Text(
-                todoItem.text ?? '',
-                style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                      decoration: todoItem.completed == true
-                          ? TextDecoration.lineThrough
-                          : null,
-                    ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                ),
+                child: Text(
+                  todoItem.text ?? '',
+                  style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                        decoration: todoItem.completed
+                            ? TextDecoration.lineThrough
+                            : null,
+                      ),
+                ),
               ),
             ),
           ],

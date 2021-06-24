@@ -25,4 +25,5 @@ abstract class TodoDatabase {
   Future<Either<Failure, List<Category>>> getCategoryList();
 
   Future<Either<Failure, List<Todo>>> getTodoList();
+  Future<Either<Failure, bool>> updateTodo(TodoModel todoModel);
 }

@@ -9,7 +9,10 @@ abstract class ILocalTodo {
   Future<Either<Failure, int>> insertTodo(TodoModel todo);
 
   Future<Either<Failure, bool>> removeTodoList();
+
   Future<Either<Failure, bool>> removeTodoBy(int id);
+
+  Future<Either<Failure, bool>> updateTodo(TodoModel todo);
 }
 
 class LocalTodoDataSource implements ILocalTodo {
@@ -37,5 +40,10 @@ class LocalTodoDataSource implements ILocalTodo {
   @override
   Future<Either<Failure, bool>> removeTodoBy(int id) async {
     return await todoDatabase.removeTodoBy(id);
+  }
+
+  @override
+  Future<Either<Failure, bool>> updateTodo(TodoModel todo) async {
+    return await todoDatabase.updateTodo(todo);
   }
 }

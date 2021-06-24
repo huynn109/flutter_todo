@@ -3,6 +3,9 @@
 - Build a Todo app with clean architecture. 
 - You can learn how to implement the architecture here: [Thanks resocoder](https://github.com/ResoCoder/flutter-tdd-clean-architecture-course)
 
+Screenshot:
+
+
 Made with:
 - [Getx](https://github.com/jonataslaw/getx)
 - [Get CLI](https://github.com/jonataslaw/get_cli)
