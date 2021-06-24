@@ -4,7 +4,8 @@
 - You can learn how to implement the architecture here: [Thanks resocoder](https://github.com/ResoCoder/flutter-tdd-clean-architecture-course)
 
 Screenshot:
-
+![Empty](https://raw.githubusercontent.com/huynn109/flutter_todo/main/screenshots/home-empty.png)
+![Data](https://raw.githubusercontent.com/huynn109/flutter_todo/main/screenshots/home-data.png)
 
 Made with:
 - [Getx](https://github.com/jonataslaw/getx)
